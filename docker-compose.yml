@@ -1,0 +1,12 @@
+services:
+
+  db:
+    image: mysql
+    restart: always
+    ports:
+      - "8001:3306"
+    environment:
+      MYSQL_DATABASE: esercitazione
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pwuser
+      MYSQL_ROOT_PASSWORD: esercitazione

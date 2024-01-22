@@ -1,0 +1,6 @@
+Stefano,AAA,AAA,AAA
+Matteo,Bianchi,Trieste,Via Dante Alighieri 27
+Mario,De Nardi,Trieste,Via Roma 1
+Matteo,Nero,Udine,Via Francesco Petrarca 15c
+Stefano,Nero,Gorizia,Via Francesco Petrarca 15c
+Mario,Rossi,Udine,Via Roma 1
