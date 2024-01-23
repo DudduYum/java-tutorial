@@ -1,4 +1,4 @@
-package testcsv;
+package models;
 
 public class Persona implements Comparable<Persona> {
     private final String nome;

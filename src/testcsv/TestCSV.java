@@ -4,6 +4,7 @@
  */
 package testcsv;
 
+import models.Persona;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -63,9 +64,9 @@ public class TestCSV {
             System.out.println(p.toString());
         }
 
-        DbContext dbContext = new DbContext();
-
-        dbContext.WriteToDb(listaPersone);
+//        DbContext dbContext = new DbContext();
+//
+//        dbContext.WriteToDb(listaPersone);
 
         String summaryFileName = "./summary.txt";
 

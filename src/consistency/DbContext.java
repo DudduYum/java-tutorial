@@ -1,5 +1,6 @@
-package testcsv;
+package consistency;
 
+import models.Persona;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ public class DbContext {
     static String username = "user";
     static String password = "pwuser";
 
-    private final Connection connection;
+    private Connection connection;
     public DbContext() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         this.connection = DriverManager.getConnection(DbContext.dbUrl, DbContext.username, DbContext.password);
