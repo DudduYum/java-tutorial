@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/rkostyuk/Documents/NetBeansProjects/TestCSV/src/models/Persona.java</file>
             <file>file:/C:/Users/rkostyuk/Documents/NetBeansProjects/TestCSV/src/testcsv/TestCSV.java</file>
-            <file>file:/C:/Users/rkostyuk/Documents/NetBeansProjects/TestCSV/src/testcsv/DbContext.java</file>
-            <file>file:/C:/Users/rkostyuk/Documents/NetBeansProjects/TestCSV/src/testcsv/Persona.java</file>
+            <file>file:/C:/Users/rkostyuk/Documents/NetBeansProjects/TestCSV/build.xml</file>
+            <file>file:/C:/Users/rkostyuk/Documents/NetBeansProjects/TestCSV/init.sql</file>
+            <file>file:/C:/Users/rkostyuk/Documents/NetBeansProjects/TestCSV/src/consistency/DbContext.java</file>
+            <file>file:/C:/Users/rkostyuk/Documents/NetBeansProjects/TestCSV/nbproject/build-impl.xml</file>
         </group>
     </open-files>
 </project-private>
