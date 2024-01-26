@@ -4,6 +4,8 @@
  */
 package testcsv;
 
+import consistency.IRepository;
+import consistency.PersonaRepository;
 import models.Persona;
 import java.io.File;
 import java.io.FileWriter;
@@ -64,9 +66,23 @@ public class TestCSV {
             System.out.println(p.toString());
         }
 
+
+        IRepository<Persona> repository = new PersonaRepository();
+        Persona[] arPersone = new Persona[listaPersone.size()];
+        Iterator<Persona> pInterator = listaPersone.iterator();
+
+        int cnt = 0;
+
+        while(true){
+            if (!pInterator.hasNext()) break;
+            arPersone[cnt++] = pInterator.next();
+        }
+
+        repository.create(arPersone);
 //        DbContext dbContext = new DbContext();
 //
 //        dbContext.WriteToDb(listaPersone);
+
 
         String summaryFileName = "./summary.txt";
 

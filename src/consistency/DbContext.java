@@ -1,10 +1,8 @@
 package consistency;
 
 import models.Persona;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 
 public class DbContext {
@@ -12,8 +10,16 @@ public class DbContext {
     static String username = "user";
     static String password = "pwuser";
 
+    public enum OperationType {
+        QUERY,
+        UPDATE
+    }
+
     private final Connection connection;
+
     public DbContext() throws ClassNotFoundException, SQLException {
+
+
         Class.forName("com.mysql.cj.jdbc.Driver");
         this.connection = DriverManager.getConnection(DbContext.dbUrl, DbContext.username, DbContext.password);
 //
@@ -26,38 +32,30 @@ public class DbContext {
         Statement statement = this.connection.createStatement();
 //        statement.execute(sql);
 //        statement.close();
-
     }
 
-    public boolean ExcecuteRawQuery(String rawQuery) throws SQLException {
+    public ResultSet ExcecuteRawQuery(String rawQuery) throws SQLException {
+        Statement statement = this.connection.createStatement();
+        ResultSet rows = statement.executeQuery(rawQuery);
+        statement.close();
+
+        statement.close();
+
+        return rows;
+    }
+
+    public boolean ExcecuteRawQuery(String rawQuery, OperationType op) throws SQLException {
 //        Connection connection = DriverManager.getConnection(DbContext.dbUrl, DbContext.username, DbContext.password);
 
         Statement statement = this.connection.createStatement();
 
+        int rowAffected = statement.executeUpdate(rawQuery);
+
         statement.close();
-        connection.close();
-        return true;
+//        connection.close();
+        return rowAffected != 0;
     }
 
-//    public void WriteToDb (ArrayList<Persona> persone) throws SQLException {
-//        Statement statement = this.connection.createStatement();
-//
-//        String sql = "INSERT INTO Persone (Nome, Cognome, Citta, Indirizzo) VALUES " ;
-//        for (Persona p : persone) {
-//            sql += "('" + p.getNome() + "'," +
-//                    "'" + p.getCognome() +  "'," +
-//                    "'"+ p.getCitta() +  "'," +
-//                    "'"+ p.getIndirizzo() + "'),";
-//        }
-//
-//        StringBuilder b = new StringBuilder(sql);
-//        b.replace(sql.lastIndexOf(","), sql.lastIndexOf(",") + 1, ";" );
-//        sql = b.toString();
-//
-//        statement.execute(sql);
-//
-//        statement.close();
-//    }
 
     public void Commit() throws SQLException {
         this.connection.commit();

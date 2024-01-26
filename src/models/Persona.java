@@ -1,14 +1,18 @@
 package models;
 
+@Table(name="Persone")
 public class Persona extends Entita implements Comparable<Persona> {
     private String nome;
     private String cognome;
     private String citta;
     private String indirizzo;
 
-
+    public Persona() {
+        super();
+    }
 
     public Persona(String nome, String come, String citta, String indirizzo) {
+        super();
         this.nome = nome;
         this.cognome = come;
         this.citta = citta;
@@ -26,6 +30,7 @@ public class Persona extends Entita implements Comparable<Persona> {
     public String getCognome() {
         return cognome;
     }
+
     public void setCognome(String cognome) {
         this.cognome = cognome;
     }
@@ -33,6 +38,7 @@ public class Persona extends Entita implements Comparable<Persona> {
     public String getCitta() {
         return citta;
     }
+
     public void setCitta(String citta) {
         this.citta = citta;
     }
@@ -44,6 +50,7 @@ public class Persona extends Entita implements Comparable<Persona> {
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }
+
     @Override
     public String toString() {
         return this.nome + "," + this.cognome + "," + this.citta + "," + this.indirizzo;
@@ -58,9 +65,10 @@ public class Persona extends Entita implements Comparable<Persona> {
         return res;
     }
 
+
     @Override
-    public String getName() {
-        return "Persona";
+    public String getTableName() {
+        return "Persone";
     }
 
     @Override
@@ -70,6 +78,13 @@ public class Persona extends Entita implements Comparable<Persona> {
 
     @Override
     public String getValues() {
-        return null;
+
+        return
+                (this.getId() == 0 ? "" : this.getId() + ",")
+                        + this.getNome() + ","
+                        + this.getCognome() + ","
+                        + this.getCitta() + ","
+                        + this.getIndirizzo()
+                ;
     }
 }
