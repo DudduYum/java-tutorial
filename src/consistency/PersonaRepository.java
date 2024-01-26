@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 
 public class PersonaRepository extends Repository<Persona> {
-    public PersonaRepository(){
+    public PersonaRepository() {
         super();
     }
 
@@ -19,10 +19,10 @@ public class PersonaRepository extends Repository<Persona> {
     protected void getFields(Persona object, ResultSet result) throws SQLException {
         super.getFields(object, result);
 
-         object.setNome(result.getString("Nome"));
-         object.setCognome(result.getString("Cognome"));
-         object.setCitta(result.getString("Citta"));
-         object.setIndirizzo(result.getString("Indirizzo"));
+        object.setNome(result.getString("Nome"));
+        object.setCognome(result.getString("Cognome"));
+        object.setCitta(result.getString("Citta"));
+        object.setIndirizzo(result.getString("Indirizzo"));
     }
 
     @Override
@@ -44,13 +44,15 @@ public class PersonaRepository extends Repository<Persona> {
 
     @Override
     protected String getValue(Persona[] objects) {
-           String value = Arrays.stream(objects).map(
+
+        String value = Arrays.stream(objects).map(
                 persona -> "(" + persona.getValues() + "),"
-                        ).reduce("", String::concat);
+        ).reduce("", String::concat);
 
         StringBuilder b = new StringBuilder(value);
-        b.replace(value.lastIndexOf(","), value.lastIndexOf(",") + 1, "" );
-        return value;
+        b.replace(value.lastIndexOf(","), value.lastIndexOf(",") + 1, "");
+        
+        return b.toString();
     }
 
     @Override

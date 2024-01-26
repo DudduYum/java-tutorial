@@ -1,12 +1,15 @@
 package models;
 
+import customAnnotations.Table;
+
 @Table(name="Persone")
 public class Persona extends Entita implements Comparable<Persona> {
     private String nome;
     private String cognome;
     private String citta;
     private String indirizzo;
-
+    
+    
     public Persona() {
         super();
     }
@@ -65,12 +68,6 @@ public class Persona extends Entita implements Comparable<Persona> {
         return res;
     }
 
-
-    @Override
-    public String getTableName() {
-        return "Persone";
-    }
-
     @Override
     public String getFields() {
         return "Nome, Cognome, Citta, Indirizzo";
@@ -80,11 +77,11 @@ public class Persona extends Entita implements Comparable<Persona> {
     public String getValues() {
 
         return
-                (this.getId() == 0 ? "" : this.getId() + ",")
-                        + this.getNome() + ","
-                        + this.getCognome() + ","
-                        + this.getCitta() + ","
-                        + this.getIndirizzo()
+                (this.getId() == 0 ? "" : "'" + this.getId() + "',")
+                        + "'" + this.getNome() + "',"
+                        + "'" + this.getCognome() + "',"
+                        + "'" + this.getCitta() + "',"
+                        + "'" + this.getIndirizzo() + "'"
                 ;
     }
 }

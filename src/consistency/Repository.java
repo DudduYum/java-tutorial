@@ -1,7 +1,7 @@
 package consistency;
 
+import customAnnotations.Table;
 import models.Entita;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.sql.ResultSet;
@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import models.Table;
 
 abstract public class Repository<T extends Entita> implements IRepository<T> {
 
@@ -24,38 +22,19 @@ abstract public class Repository<T extends Entita> implements IRepository<T> {
     public Repository(/*DbContext dbContext*/) {
         //Nota bene magari piu' il la sapro' generare una sorta di DI
 //        this.dbContext = dbContext;
-
         Type sooper = getClass().getGenericSuperclass();
         Type t = ((ParameterizedType) sooper).getActualTypeArguments()[0];
-
-        t.getClass().getAnnotations();
-
-        Class<?> clazzT;
+        
         try {
-            clazzT = ClassLoader.getSystemClassLoader()
-                    .loadClass(t.getTypeName());
+            Class<?> cl1 = Class.forName(t.getTypeName());
+            
+            Class<Table> annotationType = Table.class;
+            Table table = cl1.getAnnotation(annotationType);
+
+            this.type = table.name();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Repository.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            Class<?> cl = Class.forName(t.getTypeName());
-            Table tab = cl.getAnnotation(Table.class);
-
-            int pipo = 9;
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Repository.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-//            Class<?> cEntita = ClassLoader.getSystemClassLoader()
-//                    .loadClass("models.Persona");
-
-
-        int pipo = 9;
-
-        String[] fullName = t.getTypeName().split("\\.");
-        this.type = fullName[fullName.length - 1];
-        this.type = "Persone";
 
         try {
             this.dbContext = new DbContext();
@@ -68,6 +47,8 @@ abstract public class Repository<T extends Entita> implements IRepository<T> {
         object.setId(result.getInt(1));
 //        return object;
     }
+    
+   
 
     abstract protected List<T> getObject(ResultSet result);
 
@@ -93,7 +74,7 @@ abstract public class Repository<T extends Entita> implements IRepository<T> {
         return res;
     }
 
-    @SuppressWarnings("unchecked")
+//    @SuppressWarnings("unchecked")
     @Override
     public T[] getAll() {
         List<T> listaEntita;
@@ -116,7 +97,7 @@ abstract public class Repository<T extends Entita> implements IRepository<T> {
 
     @Override
     public void create(T[] nuovo) {
-        String sql = "INSERT INTO " + this.type + "(" + this.getCreateColumn() + ") VALUES (" + this.getValue(nuovo) + ")";
+        String sql = "INSERT INTO " + this.type + "(" + this.getCreateColumn() + ") VALUES " + this.getValue(nuovo) + ";";
 
         try {
             this.dbContext.ExcecuteRawQuery(sql, DbContext.OperationType.UPDATE);
@@ -124,25 +105,7 @@ abstract public class Repository<T extends Entita> implements IRepository<T> {
             throw new RuntimeException(e);
         }
     }
-    //    public void WriteToDb (ArrayList<Persona> persone) throws SQLException {
-//        Statement statement = this.connection.createStatement();
-//
-//        String sql = "INSERT INTO Persone (Nome, Cognome, Citta, Indirizzo) VALUES " ;
-//        for (Persona p : persone) {
-//            sql += "('" + p.getNome() + "'," +
-//                    "'" + p.getCognome() +  "'," +
-//                    "'"+ p.getCitta() +  "'," +
-//                    "'"+ p.getIndirizzo() + "'),";
-//        }
-//
-//        StringBuilder b = new StringBuilder(sql);
-//        b.replace(sql.lastIndexOf(","), sql.lastIndexOf(",") + 1, ";" );
-//        sql = b.toString();
-//
-//        statement.execute(sql);
-//
-//        statement.close();
-//    }
+
 
     @Override
     public void update(T entita) {

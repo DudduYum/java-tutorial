@@ -20,8 +20,7 @@ abstract public class Entita {
         Id = id;
     }
 
-
-    abstract public String getTableName();
+   
     abstract public String getFields();
     abstract public String getValues();
 }
